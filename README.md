@@ -43,7 +43,7 @@ https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/337ff231-68
 </table>
 
 **Limitation**: We observe following shortcomings in current version:
-1. The background may occur some artifacts, when the reference image has a clean background
+1. The background may contain some artifacts, when the reference image has a clean background
 2. Suboptimal results may arise when there is a scale mismatch between the reference image and keypoints. We have yet to implement preprocessing techniques as mentioned in the [paper](https://arxiv.org/pdf/2311.17117.pdf).
 3. Some flickering and jittering may occur when the motion sequence is subtle or the scene is static.
 

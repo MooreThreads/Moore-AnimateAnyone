@@ -65,16 +65,26 @@ pip install -r requirements.txt
 
 ## Download weights
 
-Download our trained [weights](https://huggingface.co/patrolli/AnimateAnyone/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth` and `motion_module.pth`.
+**Automatically downloading**: You can run the following command to download weights automatically:
 
-Download pretrained weight of based models and other components: 
-- [StableDiffusion V1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
-- [sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)
-- [image_encoder](https://huggingface.co/lambdalabs/sd-image-variations-diffusers/tree/main/image_encoder)
+```shell
+python tools/download_weights.py
+```
 
-Download dwpose weights (`dw-ll_ucoco_384.onnx`, `yolox_l.onnx`) following [this](https://github.com/IDEA-Research/DWPose?tab=readme-ov-file#-dwpose-for-controlnet).
+Weights will be placed under the `./pretrained_weights` direcotry. The whole downloading process may take a long time.
 
-Put these weights under a directory, like `./pretrained_weights`, and orgnize them as follows:
+**Manually downloading**: You can also download weights manually, which has some steps:
+
+1. Download our trained [weights](https://huggingface.co/patrolli/AnimateAnyone/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth` and `motion_module.pth`.
+
+2. Download pretrained weight of based models and other components: 
+    - [StableDiffusion V1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
+    - [sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)
+    - [image_encoder](https://huggingface.co/lambdalabs/sd-image-variations-diffusers/tree/main/image_encoder)
+
+3. Download dwpose weights (`dw-ll_ucoco_384.onnx`, `yolox_l.onnx`) following [this](https://github.com/IDEA-Research/DWPose?tab=readme-ov-file#-dwpose-for-controlnet).
+
+Finally, these weights should be orgnized as follows:
 
 ```text
 ./pretrained_weights/

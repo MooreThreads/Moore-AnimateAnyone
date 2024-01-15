@@ -1,21 +1,21 @@
-# 🤗 Introduction
+# 🤗 Moore-AnimateAnyone
 
 **update**：🔥🔥🔥We launch a HuggingFace Spaces demo of Moore-AnimateAnyone at [here](https://huggingface.co/spaces/xunsong/Moore-AnimateAnyone)!!
 
-This repository reproduces [AnimateAnyone](https://github.com/HumanAIGC/AnimateAnyone). To align the results demonstrated by the original paper, we adopt various approaches and tricks, which may differ somewhat from the paper and another [implementation](https://github.com/guoqincode/Open-AnimateAnyone). 
+This repository reproduces [AnimateAnyone](https://github.com/HumanAIGC/AnimateAnyone). To align the results demonstrated by the original paper, we adopt various approaches and tricks, which may differ somewhat from the paper and another [implementation](https://github.com/guoqincode/Open-AnimateAnyone).
 
-It's worth noting that this is a very preliminary version, aiming for approximating the performance (roughly 80% under our test) showed in [AnimateAnyone](https://github.com/HumanAIGC/AnimateAnyone). 
+It's worth noting that this is a very preliminary version, aiming for approximating the performance (roughly 80% under our test) showed in [AnimateAnyone](https://github.com/HumanAIGC/AnimateAnyone).
 
 We will continue to develop it, and also welcome feedbacks and ideas from the community. The enhanced version will also be launched on our [MoBi MaLiang](https://maliang.mthreads.com/) AIGC platform, running on our own full-featured GPU S4000 cloud computing platform.
 
-# 📝 Release Plans
+## 📝 Release Plans
 
 - [x] Inference codes and pretrained weights
-- [ ] Training scripts
+- [] Training scripts
 
 **Note** The training code involves private data and packages. We will organize this portion of the code as soon as possible and then release it.
 
-# 🎞️ Examples 
+## 🎞️ Examples
 
 Here are some results we generated, with the resolution of 512x768.
 
@@ -24,7 +24,7 @@ https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/f0454f30-67
 https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/337ff231-68a3-4760-a9f9-5113654acf48
 
 <table class="center">
-    
+
 <tr>
     <td width=50% style="border: none">
         <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/9c4d852e-0a99-4607-8d63-569a1f67a8d2" muted="false"></video>
@@ -45,15 +45,16 @@ https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/337ff231-68
 </table>
 
 **Limitation**: We observe following shortcomings in current version:
+
 1. The background may occur some artifacts, when the reference image has a clean background
 2. Suboptimal results may arise when there is a scale mismatch between the reference image and keypoints. We have yet to implement preprocessing techniques as mentioned in the [paper](https://arxiv.org/pdf/2311.17117.pdf).
 3. Some flickering and jittering may occur when the motion sequence is subtle or the scene is static.
 
 These issues will be addressed and improved in the near future. We appreciate your anticipation!
 
-# ⚒️ Installation
+## ⚒️ Installation
 
-## Build Environtment
+### Build Environment
 
 We Recommend a python version `>=3.10` and cuda version `=11.7`. Then build environment as follows:
 
@@ -69,7 +70,8 @@ pip install -r requirements.txt
 
 Download our trained [weights](https://huggingface.co/patrolli/AnimateAnyone/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth` and `motion_module.pth`.
 
-Download pretrained weight of based models and other components: 
+Download pretrained weight of based models and other components:
+
 - [StableDiffusion V1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
 - [sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)
 - [image_encoder](https://huggingface.co/lambdalabs/sd-image-variations-diffusers/tree/main/image_encoder)
@@ -106,7 +108,7 @@ Put these weights under a directory, like `./pretrained_weights`, and orgnize th
 
 Note: If you have installed some of the pretrained models, such as `StableDiffusion V1.5`, you can specify their paths in the config file (e.g. `./config/prompts/animation.yaml`).
 
-# 🚀 Inference 
+## 🚀 Inference
 
 Here is the cli command for running inference scripts:
 
@@ -120,30 +122,30 @@ You can refer the format of `animation.yaml` to add your own reference images or
 python tools/vid2pose.py --video_path /path/to/your/video.mp4
 ```
 
-# 🎨 Gradio Demo
+## 🎨 Gradio Demo
 
 **HuggingFace Demo**: We launch a quick preview demo of Moore-AnimateAnyone at [HuggingFace Spaces](https://huggingface.co/spaces/xunsong/Moore-AnimateAnyone)!!
 We appreciate the assistance provided by the HuggingFace team in setting up this demo.
 
-To reduce waiting time, we limit the size (width, height, and length) and inference steps when generating videos. 
+To reduce waiting time, we limit the size (width, height, and length) and inference steps when generating videos.
 
 If you have your own GPU resource (>= 16GB vram), you can run a local gradio app via following commands:
 
 `python app.py`
 
-# 🖌️ Try on Mobi MaLiang
+## 🖌️ Try on Mobi MaLiang
 
 We will launched this model on our [MoBi MaLiang](https://maliang.mthreads.com/) AIGC platform, running on our own full-featured GPU S4000 cloud computing platform. Mobi MaLiang has now integrated various AIGC applications and functionalities (e.g. text-to-image, controllable generation...). You can experience it by [clicking this link](https://maliang.mthreads.com/) or scanning the QR code bellow via WeChat!
 
 <p align="left">
   <img src="assets/mini_program_maliang.png" width="100
   "/>
-</p> 
+</p>
 
-# ⚖️ Disclaimer
+## ⚖️ Disclaimer
 
 This project is intended for academic research, and we explicitly disclaim any responsibility for user-generated content. Users are solely liable for their actions while using the generative model. The project contributors have no legal affiliation with, nor accountability for, users' behaviors. It is imperative to use the generative model responsibly, adhering to both ethical and legal standards.
 
-# 🙏🏻 Acknowledgements
+## 🙏🏻 Acknowledgements
 
-We first thank the authors of [AnimateAnyone](). Additionally, we would like to thank the contributors to the [majic-animate](https://github.com/magic-research/magic-animate), [animatediff](https://github.com/guoyww/AnimateDiff) and [Open-AnimateAnyone](https://github.com/guoqincode/Open-AnimateAnyone) repositorities, for their open research and exploration. Furthermore, our repo incorporates some codes from [dwpose](https://github.com/IDEA-Research/DWPose) and [animatediff-cli-prompt-travel](https://github.com/s9roll7/animatediff-cli-prompt-travel/), and we extend our thanks to them as well.
+We first thank the authors of [AnimateAnyone](). Additionally, we would like to thank the contributors to the [majic-animate](https://github.com/magic-research/magic-animate), [animatediff](https://github.com/guoyww/AnimateDiff) and [Open-AnimateAnyone](https://github.com/guoqincode/Open-AnimateAnyone) repositories, for their open research and exploration. Furthermore, our repo incorporates some codes from [dwpose](https://github.com/IDEA-Research/DWPose) and [animatediff-cli-prompt-travel](https://github.com/s9roll7/animatediff-cli-prompt-travel/), and we extend our thanks to them as well.

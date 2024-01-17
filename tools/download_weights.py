@@ -106,5 +106,6 @@ if __name__ == '__main__':
     prepare_base_model()
     prepare_image_encoder()
     prepare_dwpose()
+    prepare_vae()
     prepare_anyone()
     

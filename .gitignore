@@ -6,3 +6,6 @@ mlruns/
 data/
 
 *.pth
+*.pt
+*.pkl
+*.bin

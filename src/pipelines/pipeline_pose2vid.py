@@ -22,7 +22,6 @@ from src.models.mutual_self_attention import ReferenceAttentionControl
 @dataclass
 class Pose2VideoPipelineOutput(BaseOutput):
     videos: Union[torch.Tensor, np.ndarray]
-    middle_results: Union[torch.Tensor, np.ndarray]
 
 
 class Pose2VideoPipeline(DiffusionPipeline):
@@ -428,6 +427,11 @@ class Pose2VideoPipeline(DiffusionPipeline):
                     noise_pred = noise_pred_uncond + guidance_scale * (
                         noise_pred_text - noise_pred_uncond
                     )
+
+                # compute the previous noisy sample x_t -> x_t-1
+                latents = self.scheduler.step(
+                    noise_pred, t, latents, **extra_step_kwargs, return_dict=False
+                )[0]
 
                 # call the callback, if provided
                 if i == len(timesteps) - 1 or (

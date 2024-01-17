@@ -10,7 +10,6 @@ imageio==2.33.0
 imageio-ffmpeg==0.4.9
 numpy==1.23.5
 omegaconf==2.2.3
-onnxruntime==1.16.3
 onnxruntime-gpu==1.16.3
 open-clip-torch==2.20.0
 opencv-contrib-python==4.8.1.78

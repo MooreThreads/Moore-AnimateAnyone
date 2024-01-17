@@ -1,6 +1,7 @@
 import importlib
 import os
 import os.path as osp
+import shutil
 import sys
 from pathlib import Path
 
@@ -29,6 +30,22 @@ def import_filename(filename):
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def delete_additional_ckpt(base_path, num_keep):
+    dirs = []
+    for d in os.listdir(base_path):
+        if d.startswith("checkpoint-"):
+            dirs.append(d)
+    num_tot = len(dirs)
+    if num_tot <= num_keep:
+        return
+    # ensure ckpt is sorted and delete the ealier!
+    del_dirs = sorted(dirs, key=lambda x: int(x.split("-")[-1]))[: num_tot - num_keep]
+    for d in del_dirs:
+        path_to_dir = osp.join(base_path, d)
+        if osp.exists(path_to_dir):
+            shutil.rmtree(path_to_dir)
 
 
 def save_videos_from_pil(pil_images, path, fps=8):

@@ -2,3 +2,7 @@ __pycache__/
 pretrained_weights/
 output/
 .venv/
+mlruns/
+data/
+
+*.pth

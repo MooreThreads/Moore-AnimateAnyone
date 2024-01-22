@@ -1,5 +1,8 @@
 # 🤗 Introduction
 
+[![Replicate](https://replicate.com/zsxkib/moore-animateanyone/badge)](https://replicate.com/zsxkib/moore-animateanyone)
+
+
 **update** 🏋️🏋️🏋️ We release our training codes!! Now you can train your own AnimateAnyone models. See [here](#train) for more details. Have fun!
 
 **update**：🔥🔥🔥 We launch a HuggingFace Spaces demo of Moore-AnimateAnyone at [here](https://huggingface.co/spaces/xunsong/Moore-AnimateAnyone)!!

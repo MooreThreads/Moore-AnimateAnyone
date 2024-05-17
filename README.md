@@ -96,7 +96,9 @@ We Recommend a python version `>=3.10` and cuda version `=11.7`. Then build envi
 python -m venv .venv
 source .venv/bin/activate
 # Install with pip:
-pip install -r requirements.txt
+pip install -r requirements.txt  
+# For face landmark extraction
+git clone https://github.com/emilianavt/OpenSeeFace.git  
 ```
 
 ## Download weights

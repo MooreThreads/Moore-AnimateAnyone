@@ -100,6 +100,8 @@ class ReferenceAttentionControl:
             cross_attention_kwargs: Dict[str, Any] = None,
             class_labels: Optional[torch.LongTensor] = None,
             video_length=None,
+            self_attention_additional_feats=None,
+            mode=None,
         ):
             if self.use_ada_layer_norm:  # False
                 norm_hidden_states = self.norm1(hidden_states, timestep)

@@ -1,5 +1,5 @@
 # 🤗 Introduction  
-**update** 🔥🔥🔥 We propose a talking head video generation method based on our AnimateAnyone pipeline: Using the facial landmark of driving video to control the pose of given source image, and keeping the identity of source image. Specially, we disentangle head attitude (including eyes blink) and mouth motion from the landmark of driving video, and it can control the expression and movements of source face precisely. We release our inference codes and pretrained models of talking head video generation!!
+**update** 🔥🔥🔥 We propose a face reenactment method, based on our AnimateAnyone pipeline: Using the facial landmark of driving video to control the pose of given source image, and keeping the identity of source image. Specially, we disentangle head attitude (including eyes blink) and mouth motion from the landmark of driving video, and it can control the expression and movements of source face precisely. We release our inference codes and pretrained models of face reenactment!!
 
 
 **update** 🏋️🏋️🏋️ We release our training codes!! Now you can train your own AnimateAnyone models. See [here](#train) for more details. Have fun!
@@ -16,9 +16,10 @@ We will continue to develop it, and also welcome feedbacks and ideas from the co
 
 - [x] Inference codes and pretrained weights of AnimateAnyone  
 - [x] Training scripts of AnimateAnyone  
-- [x] Inference codes and pretrained weights of talking head video generation 
-- [ ] Training scripts of talking head video generation
-
+- [x] Inference codes and pretrained weights of face reenactment
+- [ ] Training scripts of face reenactment
+- [ ] Inference scripts of audio driven portrait video generation
+- [ ] Training scripts of audio driven portrait video generation
 # 🎞️ Examples 
 
 ## AnimateAnyone  
@@ -59,7 +60,7 @@ https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/337ff231-68
 
 These issues will be addressed and improved in the near future. We appreciate your anticipation!
 
-## Talking Head Video Generation
+## Face Reenactment(Face Reenactment)
 
 Here are some talking head video results we generated, with the resolution of 512x512.  
 
@@ -115,7 +116,7 @@ Weights will be placed under the `./pretrained_weights` direcotry. The whole dow
 
 1. Download our AnimateAnyone trained [weights](https://huggingface.co/patrolli/AnimateAnyone/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth` and `motion_module.pth`.
 
-2. Download our trained [weights](https://pan.baidu.com/s/1lS5CynyNfYlDbjowKKfG8g?pwd=crci) of talking head video generation, and place these weights under `pretrained_weights`.
+2. Download our trained [weights](https://pan.baidu.com/s/1lS5CynyNfYlDbjowKKfG8g?pwd=crci) of face reenactment, and place these weights under `pretrained_weights`.
 
 3. Download pretrained weight of based models and other components: 
     - [StableDiffusion V1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
@@ -175,7 +176,7 @@ You can refer the format of `animation.yaml` to add your own reference images or
 python tools/vid2pose.py --video_path /path/to/your/video.mp4
 ```
 
-## Inference of Talking Head Video Generation
+## Inference of Face Reenactment
 Here is the cli command for running inference scripts:
 
 ```shell

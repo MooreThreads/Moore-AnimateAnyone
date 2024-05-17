@@ -1,9 +1,10 @@
 import copy
-import os
+import os, sys
 import math
 import numpy as np
 import cv2
-from OpenSeeFace.tracker import Tracker, get_model_base_path
+sys.path.append("OpenSeeFace/")
+from tracker import Tracker, get_model_base_path
 
 features = ["eye_l", "eye_r", "eyebrow_steepness_l", "eyebrow_updown_l", "eyebrow_quirk_l", "eyebrow_steepness_r", "eyebrow_updown_r", "eyebrow_quirk_r", "mouth_corner_updown_l", "mouth_corner_inout_l", "mouth_corner_updown_r", "mouth_corner_inout_r", "mouth_open", "mouth_wide"]
 

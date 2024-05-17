@@ -17,6 +17,7 @@ We will continue to develop it, and also welcome feedbacks and ideas from the co
 - [x] Inference codes and pretrained weights of AnimateAnyone  
 - [x] Training scripts of AnimateAnyone  
 - [x] Inference codes and pretrained weights of talking head video generation 
+- [ ] Training scripts of talking head video generation
 
 # 🎞️ Examples 
 

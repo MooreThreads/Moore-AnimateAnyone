@@ -64,19 +64,19 @@ Here are some talking head video results we generated, with the resolution of 51
     
 <tr>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="./configs/inference/talkinghead_demos/1.mp4" muted="false"></video>
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/1.mp4" muted="false"></video>
     </td>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="./configs/inference/talkinghead_demos/2.mp4" muted="false"></video>
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/2.mp4" muted="false"></video>
     </td>
 </tr>
 
 <tr>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="./configs/inference/talkinghead_demos/3.mp4" muted="false"></video>
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/3.mp4" muted="false"></video>
     </td>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="./configs/inference/talkinghead_demos/4.mp4" muted="false"></video>
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/4.mp4" muted="false"></video>
     </td>
 </tr>
 </table>

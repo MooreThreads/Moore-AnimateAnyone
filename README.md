@@ -60,7 +60,7 @@ https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/337ff231-68
 
 These issues will be addressed and improved in the near future. We appreciate your anticipation!
 
-## Face Reenactment(Face Reenactment)
+## Face Reenactment
 
 Here are some talking head video results we generated, with the resolution of 512x512.  
 

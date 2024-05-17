@@ -62,7 +62,7 @@ These issues will be addressed and improved in the near future. We appreciate yo
 
 ## Face Reenactment
 
-Here are some talking head video results we generated, with the resolution of 512x512.  
+Here are some results we generated, with the resolution of 512x512.  
 
 <table class="center">
     

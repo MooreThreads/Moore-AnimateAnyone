@@ -112,7 +112,7 @@ Weights will be placed under the `./pretrained_weights` direcotry. The whole dow
 
 1. Download our AnimateAnyone trained [weights](https://huggingface.co/patrolli/AnimateAnyone/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth` and `motion_module.pth`.
 
-2. Download our trained [weights](https://huggingface.co/patrolli/AnimateAnyone/tree/main) of talking head video generation, and place these weights under `pretrained_weights`.
+2. Download our trained [weights](https://pan.baidu.com/s/1lS5CynyNfYlDbjowKKfG8g?pwd=crci) of talking head video generation, and place these weights under `pretrained_weights`.
 
 3. Download pretrained weight of based models and other components: 
     - [StableDiffusion V1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)

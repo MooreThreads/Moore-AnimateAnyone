@@ -54,6 +54,8 @@ https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/337ff231-68
 2. Suboptimal results may arise when there is a scale mismatch between the reference image and keypoints. We have yet to implement preprocessing techniques as mentioned in the [paper](https://arxiv.org/pdf/2311.17117.pdf).
 3. Some flickering and jittering may occur when the motion sequence is subtle or the scene is static.
 
+
+
 These issues will be addressed and improved in the near future. We appreciate your anticipation!
 
 ## Talking Head Video Generation
@@ -64,7 +66,11 @@ Here are some talking head video results we generated, with the resolution of 51
     
 <tr>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/9c4d852e-0a99-4607-8d63-569a1f67a8d2" muted="false"></video>
+        <video controls autoplay loop src="
+
+Uploading 1.mp4…
+
+" muted="false"></video>
     </td>
     <td width=50% style="border: none">
         <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/2.mp4" muted="false"></video>

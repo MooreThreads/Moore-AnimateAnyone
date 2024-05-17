@@ -67,19 +67,19 @@ Here are some talking head video results we generated, with the resolution of 51
     
 <tr>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/1.mp4" muted="false"></video>
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/117793823/8cfaddec-fb81-485e-88e9-229c0adb8bf9" muted="false"></video>
     </td>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/2.mp4" muted="false"></video>
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/117793823/ad06ba29-5bb2-490e-a204-7242c724ba8b" muted="false"></video>
     </td>
 </tr>
 
 <tr>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/3.mp4" muted="false"></video>
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/117793823/6843cdc0-830b-4f91-87c5-41cd12fbe8c2" muted="false"></video>
     </td>
     <td width=50% style="border: none">
-        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/blob/talkinghead/assets/4.mp4" muted="false"></video>
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/117793823/bb9b8b74-ba4b-4f62-8fd1-7ebf140acc81" muted="false"></video>
     </td>
 </tr>
 </table>

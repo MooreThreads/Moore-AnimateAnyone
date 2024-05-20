@@ -45,6 +45,7 @@ class Transformer3DModel(ModelMixin, ConfigMixin):
         upcast_attention: bool = False,
         unet_use_cross_frame_attention=None,
         unet_use_temporal_attention=None,
+        name=None,
     ):
         super().__init__()
         self.use_linear_projection = use_linear_projection
@@ -54,6 +55,7 @@ class Transformer3DModel(ModelMixin, ConfigMixin):
 
         # Define input layers
         self.in_channels = in_channels
+        self.name=name
 
         self.norm = torch.nn.GroupNorm(
             num_groups=norm_num_groups, num_channels=in_channels, eps=1e-6, affine=True
@@ -81,6 +83,7 @@ class Transformer3DModel(ModelMixin, ConfigMixin):
                     upcast_attention=upcast_attention,
                     unet_use_cross_frame_attention=unet_use_cross_frame_attention,
                     unet_use_temporal_attention=unet_use_temporal_attention,
+                    name=f"{self.name}_{d}_TransformerBlock" if self.name else None,
                 )
                 for d in range(num_layers)
             ]
@@ -104,6 +107,8 @@ class Transformer3DModel(ModelMixin, ConfigMixin):
         self,
         hidden_states,
         encoder_hidden_states=None,
+        self_attention_additional_feats=None,
+        mode=None,
         timestep=None,
         return_dict: bool = True,
     ):
@@ -137,12 +142,40 @@ class Transformer3DModel(ModelMixin, ConfigMixin):
 
         # Blocks
         for i, block in enumerate(self.transformer_blocks):
-            hidden_states = block(
-                hidden_states,
-                encoder_hidden_states=encoder_hidden_states,
-                timestep=timestep,
-                video_length=video_length,
-            )
+            
+            if self.training and self.gradient_checkpointing:
+
+                def create_custom_forward(module, return_dict=None):
+                    def custom_forward(*inputs):
+                        if return_dict is not None:
+                            return module(*inputs, return_dict=return_dict)
+                        else:
+                            return module(*inputs)
+
+                    return custom_forward
+
+                # if hasattr(self.block, 'bank') and len(self.block.bank) > 0:
+                #     hidden_states
+                hidden_states = torch.utils.checkpoint.checkpoint(
+                    create_custom_forward(block),
+                    hidden_states,
+                    encoder_hidden_states,
+                    timestep,
+                    None,
+                    video_length,
+                    self_attention_additional_feats,
+                    mode,
+                )
+            else:
+
+                hidden_states = block(
+                    hidden_states,
+                    encoder_hidden_states=encoder_hidden_states,
+                    timestep=timestep,
+                    self_attention_additional_feats=self_attention_additional_feats,
+                    mode=mode,
+                    video_length=video_length,
+                )
 
         # Output
         if not self.use_linear_projection:

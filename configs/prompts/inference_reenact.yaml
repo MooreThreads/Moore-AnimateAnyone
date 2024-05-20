@@ -1,0 +1,48 @@
+pretrained_base_model_path: "./pretrained_weights/stable-diffusion-v1-5/"
+pretrained_vae_path: "./pretrained_weights/sd-vae-ft-mse"
+image_encoder_path: "./pretrained_weights/image_encoder"
+denoising_unet_path: "./pretrained_weights/reenact/denoising_unet.pth"
+reference_unet_path: "./pretrained_weights/reenact/reference_unet.pth"
+pose_guider1_path: "./pretrained_weights/reenact/pose_guider1.pth"
+pose_guider2_path: "./pretrained_weights/reenact/pose_guider2.pth"
+unet_additional_kwargs:
+  task_type: "reenact"
+  mode: "read"    # "read"
+  use_inflated_groupnorm: true
+  unet_use_cross_frame_attention: false 
+  unet_use_temporal_attention: false
+  use_motion_module: true
+  motion_module_resolutions:
+  - 1
+  - 2
+  - 4
+  - 8
+  motion_module_mid_block: true 
+  motion_module_decoder_only: false
+  motion_module_type: Vanilla
+  motion_module_kwargs:
+    num_attention_heads: 8
+    num_transformer_block: 1
+    attention_block_types:
+    - Temporal_Self
+    - Temporal_Self
+    temporal_position_encoding: true
+    temporal_position_encoding_max_len: 32
+    temporal_attention_dim_div: 1
+
+noise_scheduler_kwargs:
+  beta_start: 0.00085
+  beta_end: 0.012
+  beta_schedule: "linear"
+  # beta_schedule: "scaled_linear"
+  clip_sample: false
+  # set_alpha_to_one: False
+  # skip_prk_steps: true
+  steps_offset: 1
+  ### Zero-SNR params
+  # prediction_type: "v_prediction"
+  # rescale_betas_zero_snr: True
+  # timestep_spacing: "trailing"
+
+weight_dtype: float16
+sampler: DDIM

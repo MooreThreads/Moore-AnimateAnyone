@@ -310,12 +310,14 @@ class TemporalBasicTransformerBlock(nn.Module):
         upcast_attention: bool = False,
         unet_use_cross_frame_attention=None,
         unet_use_temporal_attention=None,
+        name=None,
     ):
         super().__init__()
         self.only_cross_attention = only_cross_attention
         self.use_ada_layer_norm = num_embeds_ada_norm is not None
         self.unet_use_cross_frame_attention = unet_use_cross_frame_attention
         self.unet_use_temporal_attention = unet_use_temporal_attention
+        self.name=name
 
         # SC-Attn
         self.attn1 = Attention(
@@ -359,7 +361,6 @@ class TemporalBasicTransformerBlock(nn.Module):
         self.ff = FeedForward(dim, dropout=dropout, activation_fn=activation_fn)
         self.norm3 = nn.LayerNorm(dim)
         self.use_ada_layer_norm_zero = False
-
         # Temp-Attn
         assert unet_use_temporal_attention is not None
         if unet_use_temporal_attention:
@@ -385,27 +386,64 @@ class TemporalBasicTransformerBlock(nn.Module):
         timestep=None,
         attention_mask=None,
         video_length=None,
+        self_attention_additional_feats=None,
+        mode=None,
     ):
         norm_hidden_states = (
             self.norm1(hidden_states, timestep)
             if self.use_ada_layer_norm
             else self.norm1(hidden_states)
         )
-
-        if self.unet_use_cross_frame_attention:
-            hidden_states = (
-                self.attn1(
-                    norm_hidden_states,
-                    attention_mask=attention_mask,
-                    video_length=video_length,
+        if self.name:
+            modify_norm_hidden_states = norm_hidden_states
+            if mode == "write":
+                self_attention_additional_feats[self.name]=norm_hidden_states
+            elif mode == "read" and self_attention_additional_feats:
+                ref_states = self_attention_additional_feats[self.name]
+                bank_fea = [
+                    rearrange(
+                        ref_states.unsqueeze(1).repeat(1, video_length, 1, 1),
+                        "b t l c -> (b t) l c",
+                    )
+                ]
+                modify_norm_hidden_states = torch.cat(
+                    [norm_hidden_states] + bank_fea, dim=1
                 )
-                + hidden_states
-            )
-        else:
-            hidden_states = (
-                self.attn1(norm_hidden_states, attention_mask=attention_mask)
-                + hidden_states
-            )
+
+            if self.unet_use_cross_frame_attention:
+                hidden_states = (
+                    self.attn1(
+                        norm_hidden_states,
+                        attention_mask=attention_mask,
+                        encoder_hidden_states=modify_norm_hidden_states,
+                        video_length=video_length,
+                    )
+                    + hidden_states
+                )
+            else:
+                hidden_states = (
+                    self.attn1(
+                        norm_hidden_states, 
+                        encoder_hidden_states=modify_norm_hidden_states,
+                        attention_mask=attention_mask
+                    )
+                    + hidden_states
+                )
+        else:    
+            if self.unet_use_cross_frame_attention:
+                hidden_states = (
+                    self.attn1(
+                        norm_hidden_states,
+                        attention_mask=attention_mask,
+                        video_length=video_length,
+                    )
+                    + hidden_states
+                )
+            else:
+                hidden_states = (
+                    self.attn1(norm_hidden_states, attention_mask=attention_mask)
+                    + hidden_states
+                )
 
         if self.attn2 is not None:
             # Cross-Attention

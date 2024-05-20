@@ -1,4 +1,6 @@
-# 🤗 Introduction
+# 🤗 Introduction  
+**update** 🔥🔥🔥 We propose a face reenactment method, based on our AnimateAnyone pipeline: Using the facial landmark of driving video to control the pose of given source image, and keeping the identity of source image. Specially, we disentangle head attitude (including eyes blink) and mouth motion from the landmark of driving video, and it can control the expression and movements of source face precisely. We release our inference codes and pretrained models of face reenactment!!
+
 
 **update** 🏋️🏋️🏋️ We release our training codes!! Now you can train your own AnimateAnyone models. See [here](#train) for more details. Have fun!
 
@@ -12,12 +14,17 @@ We will continue to develop it, and also welcome feedbacks and ideas from the co
 
 # 📝 Release Plans
 
-- [x] Inference codes and pretrained weights
-- [x] Training scripts
-
+- [x] Inference codes and pretrained weights of AnimateAnyone  
+- [x] Training scripts of AnimateAnyone  
+- [x] Inference codes and pretrained weights of face reenactment
+- [ ] Training scripts of face reenactment
+- [ ] Inference scripts of audio driven portrait video generation
+- [ ] Training scripts of audio driven portrait video generation
 # 🎞️ Examples 
 
-Here are some results we generated, with the resolution of 512x768.
+## AnimateAnyone  
+
+Here are some AnimateAnyone results we generated, with the resolution of 512x768.
 
 https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/f0454f30-6726-4ad4-80a7-5b7a15619057
 
@@ -49,7 +56,35 @@ https://github.com/MooreThreads/Moore-AnimateAnyone/assets/138439222/337ff231-68
 2. Suboptimal results may arise when there is a scale mismatch between the reference image and keypoints. We have yet to implement preprocessing techniques as mentioned in the [paper](https://arxiv.org/pdf/2311.17117.pdf).
 3. Some flickering and jittering may occur when the motion sequence is subtle or the scene is static.
 
+
+
 These issues will be addressed and improved in the near future. We appreciate your anticipation!
+
+## Face Reenactment
+
+Here are some results we generated, with the resolution of 512x512.  
+
+<table class="center">
+    
+<tr>
+    <td width=50% style="border: none">
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/117793823/8cfaddec-fb81-485e-88e9-229c0adb8bf9" muted="false"></video>
+    </td>
+    <td width=50% style="border: none">
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/117793823/ad06ba29-5bb2-490e-a204-7242c724ba8b" muted="false"></video>
+    </td>
+</tr>
+
+<tr>
+    <td width=50% style="border: none">
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/117793823/6843cdc0-830b-4f91-87c5-41cd12fbe8c2" muted="false"></video>
+    </td>
+    <td width=50% style="border: none">
+        <video controls autoplay loop src="https://github.com/MooreThreads/Moore-AnimateAnyone/assets/117793823/bb9b8b74-ba4b-4f62-8fd1-7ebf140acc81" muted="false"></video>
+    </td>
+</tr>
+</table>
+
 
 # ⚒️ Installation
 
@@ -62,7 +97,9 @@ We Recommend a python version `>=3.10` and cuda version `=11.7`. Then build envi
 python -m venv .venv
 source .venv/bin/activate
 # Install with pip:
-pip install -r requirements.txt
+pip install -r requirements.txt  
+# For face landmark extraction
+git clone https://github.com/emilianavt/OpenSeeFace.git  
 ```
 
 ## Download weights
@@ -77,14 +114,16 @@ Weights will be placed under the `./pretrained_weights` direcotry. The whole dow
 
 **Manually downloading**: You can also download weights manually, which has some steps:
 
-1. Download our trained [weights](https://huggingface.co/patrolli/AnimateAnyone/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth` and `motion_module.pth`.
+1. Download our AnimateAnyone trained [weights](https://huggingface.co/patrolli/AnimateAnyone/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth` and `motion_module.pth`.
 
-2. Download pretrained weight of based models and other components: 
+2. Download our trained [weights](https://pan.baidu.com/s/1lS5CynyNfYlDbjowKKfG8g?pwd=crci) of face reenactment, and place these weights under `pretrained_weights`.
+
+3. Download pretrained weight of based models and other components: 
     - [StableDiffusion V1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
     - [sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)
     - [image_encoder](https://huggingface.co/lambdalabs/sd-image-variations-diffusers/tree/main/image_encoder)
 
-3. Download dwpose weights (`dw-ll_ucoco_384.onnx`, `yolox_l.onnx`) following [this](https://github.com/IDEA-Research/DWPose?tab=readme-ov-file#-dwpose-for-controlnet).
+4. Download dwpose weights (`dw-ll_ucoco_384.onnx`, `yolox_l.onnx`) following [this](https://github.com/IDEA-Research/DWPose?tab=readme-ov-file#-dwpose-for-controlnet).
 
 Finally, these weights should be orgnized as follows:
 
@@ -104,6 +143,11 @@ Finally, these weights should be orgnized as follows:
 |   |-- config.json
 |   |-- diffusion_pytorch_model.bin
 |   `-- diffusion_pytorch_model.safetensors
+|-- reenact
+|   |-- denoising_unet.pth
+|   |-- reference_unet.pth
+|   |-- pose_guider1.pth
+|   |-- pose_guider2.pth
 `-- stable-diffusion-v1-5
     |-- feature_extractor
     |   `-- preprocessor_config.json
@@ -118,7 +162,7 @@ Note: If you have installed some of the pretrained models, such as `StableDiffus
 
 # 🚀 Training and Inference 
 
-## Inference
+## Inference of AnimateAnyone
 
 Here is the cli command for running inference scripts:
 
@@ -132,7 +176,15 @@ You can refer the format of `animation.yaml` to add your own reference images or
 python tools/vid2pose.py --video_path /path/to/your/video.mp4
 ```
 
-## <span id="train"> Training </span>
+## Inference of Face Reenactment
+Here is the cli command for running inference scripts:
+
+```shell
+python -m scripts.lmks2vid --config ./configs/prompts/inference_reenact.yaml --driving_video_path YOUR_OWN_DRIVING_VIDEO_PATH --source_image_path YOUR_OWN_SOURCE_IMAGE_PATH  
+```  
+We provide some face images in `./config/inference/talkinghead_images`, and some face videos in `./config/inference/talkinghead_videos` for inference.  
+
+## <span id="train"> Training of AnimateAnyone </span>
 
 Note: package dependencies have been updated, you may upgrade your environment via `pip install -r requirements.txt` before training.
 

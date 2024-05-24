@@ -140,7 +140,8 @@ def log_validation(
     denoising_unet = ori_net.denoising_unet
     pose_guider = ori_net.pose_guider
 
-    generator = torch.manual_seed(42)
+    # generator = torch.manual_seed(42)
+    generator = torch.Generator().manual_seed(42)
     # cast unet dtype
     vae = vae.to(dtype=torch.float32)
     image_enc = image_enc.to(dtype=torch.float32)

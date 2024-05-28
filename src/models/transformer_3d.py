@@ -159,12 +159,12 @@ class Transformer3DModel(ModelMixin, ConfigMixin):
                 hidden_states = torch.utils.checkpoint.checkpoint(
                     create_custom_forward(block),
                     hidden_states,
-                    encoder_hidden_states,
-                    timestep,
-                    None,
-                    video_length,
-                    self_attention_additional_feats,
-                    mode,
+                    encoder_hidden_states=encoder_hidden_states,
+                    timestep=timestep,
+                    attention_mask=None,
+                    video_length=video_length,
+                    self_attention_additional_feats=self_attention_additional_feats,
+                    mode=mode,
                 )
             else:
 

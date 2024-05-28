@@ -451,9 +451,9 @@ class CrossAttnDownBlock3D(nn.Module):
                 hidden_states = torch.utils.checkpoint.checkpoint(
                     create_custom_forward(attn, return_dict=False),
                     hidden_states,
-                    encoder_hidden_states,
-                    self_attention_additional_feats,
-                    mode,
+                    encoder_hidden_states=encoder_hidden_states,
+                    self_attention_additional_feats=self_attention_additional_feats,
+                    mode=mode,
                 )[0]
 
                 # add motion module
@@ -588,7 +588,7 @@ class DownBlock3D(nn.Module):
                         create_custom_forward(motion_module),
                         hidden_states.requires_grad_(),
                         temb,
-                        encoder_hidden_states,
+                        encoder_hidden_states=encoder_hidden_states,
                     )
             else:
                 hidden_states = resnet(hidden_states, temb)
@@ -752,9 +752,9 @@ class CrossAttnUpBlock3D(nn.Module):
                 hidden_states = torch.utils.checkpoint.checkpoint(
                     create_custom_forward(attn, return_dict=False),
                     hidden_states,
-                    encoder_hidden_states,
-                    self_attention_additional_feats,
-                    mode,
+                    encoder_hidden_states=encoder_hidden_states,
+                    self_attention_additional_feats=self_attention_additional_feats,
+                    mode=mode,
                 )[0]
                 if motion_module is not None:
                     hidden_states = torch.utils.checkpoint.checkpoint(

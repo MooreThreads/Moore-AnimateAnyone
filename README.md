@@ -2,6 +2,9 @@
 **update** 🔥🔥🔥 We propose a face reenactment method, based on our AnimateAnyone pipeline: Using the facial landmark of driving video to control the pose of given source image, and keeping the identity of source image. Specially, we disentangle head attitude (including eyes blink) and mouth motion from the landmark of driving video, and it can control the expression and movements of source face precisely. We release our inference codes and pretrained models of face reenactment!!
 
 
+[![Replicate](https://replicate.com/zsxkib/moore-animateanyone/badge)](https://replicate.com/zsxkib/moore-animateanyone)
+
+
 **update** 🏋️🏋️🏋️ We release our training codes!! Now you can train your own AnimateAnyone models. See [here](#train) for more details. Have fun!
 
 **update**：🔥🔥🔥 We launch a HuggingFace Spaces demo of Moore-AnimateAnyone at [here](https://huggingface.co/spaces/xunsong/Moore-AnimateAnyone)!!

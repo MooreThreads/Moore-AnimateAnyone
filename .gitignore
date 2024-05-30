@@ -9,3 +9,14 @@ data/
 *.pt
 *.pkl
 *.bin
+
+# Replicate
+*.mp4
+*.ckpt
+*.onnx
+*.tar
+*.tar.gz
+*.h5
+*.pb
+*.caffemodel
+*.weights

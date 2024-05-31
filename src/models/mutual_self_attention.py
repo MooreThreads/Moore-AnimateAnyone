@@ -45,8 +45,8 @@ class ReferenceAttentionControl:
             style_fidelity,
             reference_attn,
             reference_adain,
-            fusion_blocks,
             batch_size=batch_size,
+            fusion_blocks=fusion_blocks,
         )
 
     def register_reference_hooks(
